@@ -72,7 +72,9 @@ class CadastroPostOk(TestCase):
     def setUp(self):
         data = {'titulo': 'Contos de Machado de Assis',
                 'editora': 'editora Brasil',
-                'autor': 'Machado de Assis',}
+                'autor': 'Machado de Assis',
+                'isbn':'1234567890000',
+                'ano':1996,}
         self.resp = self.client.post(r('core:cadastro'), data, follow=True)
         self.resp2 = self.client.post(r('core:cadastro'), data)
 
@@ -174,7 +176,9 @@ class ListarGet_OneBook_Test(TestCase):
         self.livro = LivroModel(
             titulo='Contos de Machado de Assis',
             editora='editora Brasil',
-            autor='Machado de Assis',)
+            autor='Machado de Assis',
+            isbn='1234567890000',
+            ano=1996,)
         self.livro.save()
         self.resp = self.client.get(r('core:listar'), follow=True)
 
@@ -205,7 +209,10 @@ class ListarPost_OneBook_Test(TestCase):
         self.livro = LivroModel(
             titulo='Contos de Machado de Assis',
             editora='editora Brasil',
-            autor='Machado de Assis',)
+            autor='Machado de Assis',
+            isbn='1234567890000',
+            ano=1996,)
+    
         self.livro.save()
         data = {'livro_id': self.livro.pk}
         self.resp = self.client.post(r('core:listar'), data)
@@ -238,6 +245,8 @@ class LivroModelModelTest(TestCase):
             titulo='Contos de Machado de Assis',
             editora='editora Brasil',
             autor='Machado de Assis',
+            isbn='1234567890000',
+            ano=1996
             )
         self.livro.save()
 
@@ -248,7 +257,7 @@ class LivroModelModelTest(TestCase):
 class LivroFormTest(TestCase):
     def test_fields_in_form(self):
         form = LivroForm()
-        expected = ['titulo', 'editora','autor']
+        expected = ['titulo', 'editora','autor','isbn','ano']
         self.assertSequenceEqual(expected, list(form.fields))
     
     def test_form_all_OK(self):

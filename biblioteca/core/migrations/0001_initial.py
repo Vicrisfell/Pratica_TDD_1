@@ -18,7 +18,8 @@ class Migration(migrations.Migration):
                 ('titulo', models.CharField(max_length=200, verbose_name='Título')),
                 ('editora', models.CharField(max_length=200, verbose_name='editora')),
                 ('autor', models.CharField(max_length=200, verbose_name='autor')),
-                ('isbn',models.CharField(max_length=200, verbose_name='isbn')),
+                ('isbn', models.CharField(max_length=200, verbose_name='isbn')),
+                ('ano', models.CharField(max_length=200, verbose_name='ano')),
             ],
         ),
     ]
