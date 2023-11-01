@@ -42,17 +42,17 @@ class LivroForm(forms.ModelForm):
         return editora
 
     def clean_autor(self):
-        autor = self.clean_autor['autor']
+        autor = self.cleaned_data['autor']
         validate_title(autor)
         return autor
     
     def clean_isbn(self):
-        isbn = self.clean_isbn['isbn']
+        isbn = self.cleaned_data['isbn']
         validate_title(isbn)
         return isbn
     
     def clean_ano(self):
-        ano = self.clean_ano['ano']
+        ano = self.cleaned_data['ano']
         validate_title(ano)
         return ano
     

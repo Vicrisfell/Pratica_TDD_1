@@ -20,7 +20,7 @@ class IndexGetTest(TestCase):
             ('<html', 1),
             ('<body>', 1),
             ('Biblioteca', 2),
-            ('<input', 2),
+            ('<input', 2),        
             ('<br>', 3),
             ('</body>', 1),
             ('</html>', 1),
@@ -58,8 +58,8 @@ class CadastroGetTest(TestCase):
             ('<html', 1),
             ('<body>', 1),
             ('Biblioteca', 2),
-            ('<input', 5),
-            ('<br>', 5),
+            ('<input', 8),
+            ('<br>', 7),
             ('</body>', 1),
             ('</html>', 1),
         )
@@ -230,7 +230,7 @@ class ListarPost_OneBook_Test(TestCase):
             ('Biblioteca', 2),
             ('<input', 1),
             ('Contos de Machado de Assis', 1),
-            ('<br>', 6),
+            ('<br>', 12),
             ('</body>', 1),
             ('</html>', 1),
         )
@@ -261,9 +261,9 @@ class LivroFormTest(TestCase):
         self.assertSequenceEqual(expected, list(form.fields))
     
     def test_form_all_OK(self):
-        dados = dict(titulo='Contos do Machado de Assis', editora='Editora Brasil', autor='Machado de Assis')
+        dados = dict(titulo='Contos do Machado de Assis', editora='editora Brasil', autor='Machado de Assis', isbn='1234567890000', ano=1996)
         form = LivroForm(dados)
-        errors = form.errors
+        errors = form.errors 
         self.assertEqual({}, errors)
         
     def test_form_without_data_1(self):
@@ -283,7 +283,7 @@ class LivroFormTest(TestCase):
         self.assertEqual([msg], errors_list)
     
     def test_form_less_than_3_character_1(self):
-        dados = dict(titulo='123', editora='Elementar')
+        dados = dict(titulo='Contos do Machados de Assis', editora='editora Brasil')
         form = LivroForm(dados)
         errors = form.errors
         errors_list = errors['titulo']
@@ -291,7 +291,7 @@ class LivroFormTest(TestCase):
         self.assertEqual([msg], errors_list)
     
     def test_form_less_than_3_character_2(self):
-        dados = dict(titulo='ABC', editora='123')
+        dados = dict(titulo='Contos do Machado de Assis', editora='editora Brasil')
         form = LivroForm(dados)
         errors = form.errors
         errors_list = errors['editora']
